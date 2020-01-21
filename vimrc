@@ -52,5 +52,6 @@ map PD :! mupdf $(echo % \| sed 's/tex$/pdf/') & disown<CR><CR>
 "Auto close NERDtree after open file
 let NERDTreeQuitOnOpen=1
 
+set mouse=a
 set number
 set guifont=h24
