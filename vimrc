@@ -9,18 +9,13 @@ call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
-Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
-Plug 'vim-latex/vim-latex'
-Plug 'ebranlard/vim-matlab-behave'
-Plug 'yinflying/matlab-screen'
-Plug 'nvie/vim-flake8'
-
+Plug 'lervag/vimtex'
+Plug 'sillybun/vim-repl'
 call plug#end()
 "end plugin manager
 "
 "Python stuff
-autocmd FileType python nnoremap <buffer> <F12> :exec '!python' shellescape(@%, 1)<cr>
 
 " Track the engine.
 
@@ -32,26 +27,28 @@ autocmd FileType python nnoremap <buffer> <F12> :exec '!python' shellescape(@%, 
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-d>"
 let g:UltiSnipsJumpBackwardTrigger="<c-a>"
-let g:AutoPairsShortcutJump = '<S-tab>'
+let g:AutoPairsShortcutJump = '<c-e>'
 "List Snippets
-let g:UltiSnipsListSnippets="<c-l>" 
+
 
 "corrects tex empty file type
 let g:tex_flavor = "latex" 
-let mapleader=";"
+let mapleader=" "
 
-map SO :so .vimrc<CR>
+map <leader>so :source ~/.vimrc<CR>
 map QQ :q!<CR>
-map W :w!<CR>
-map E :e .vimrc<CR>
+map <leader>W :w!<CR>
+map <leader>e :e! .vimrc<CR>
 map N :NERDTree<CR>
-map CC :! pdflatex %<CR><CR>
-map PD :! mupdf $(echo % \| sed 's/tex$/pdf/') & disown<CR><CR>
-
+noremap <Leader>y "+y
+noremap <Leader>p "+p
 
 "Auto close NERDtree after open file
 let NERDTreeQuitOnOpen=1
+let g:NERDTreeShowLineNumbers=1
 
 set mouse=a
-set number
+set relativenumber
 set guifont=h24
+
+
