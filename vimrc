@@ -8,11 +8,14 @@ endif
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sillybun/vim-repl'
 Plug 'lervag/vimtex'
 Plug 'vim-syntastic/syntastic'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 "end plugin manager
 "
@@ -63,10 +66,17 @@ map <leader>so :source ~/.vimrc<CR>
 map QQ :q!<CR>
 map <leader>W :w!<CR>
 map <leader>e :e! .vimrc<CR>
-map N :NERDTree<CR>
+map <leader>n :NERDTree<CR>
 noremap <Leader>y "+y
 noremap <Leader>p "+p
+nnoremap <F3> :set hlsearch!<CR>
 
+"Fuzzy finder
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+nnoremap <silent> <leader>o :FzfFiles<CR>
 "Auto close NERDtree after open file
 let NERDTreeQuitOnOpen=1
 let g:NERDTreeShowLineNumbers=1
@@ -74,5 +84,6 @@ let g:NERDTreeShowLineNumbers=1
 set mouse=a
 set relativenumber
 set guifont=h24
+set hlsearch
 
 
