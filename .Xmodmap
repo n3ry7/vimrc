@@ -1,0 +1,8 @@
+clear lock
+clear control
+add control = Caps_Lock Control_L Control_R
+keycode 66 = Control_L Caps_Lock NoSymbol NoSymbol
+keysym a = a A a A Left Left
+keysym s = s S s S Down Down
+keysym d = d D d D Right Right
+keysym w = w W w W Up Up
