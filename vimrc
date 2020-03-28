@@ -18,7 +18,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 call plug#end()
 "end plugin manager
-"
+
 "Python stuff
 let g:repl_program = {
             \   'python': 'ipython',
@@ -58,7 +58,8 @@ let g:vimtex_quickfix_ignore_all_warnings = 0
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
-
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_quickfix_open_on_warning = 0
 let mapleader=" "
 let maplocalleader=" "
 
@@ -67,9 +68,10 @@ map QQ :q!<CR>
 map <leader>W :w!<CR>
 map <leader>e :e! .vimrc<CR>
 map <leader>n :NERDTree<CR>
+map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>
 noremap <Leader>y "+y
 noremap <Leader>p "+p
-nnoremap <F3> :set hlsearch!<CR>
+nnoremap <leader>hl :set hlsearch!<CR>
 
 "Fuzzy finder
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -77,6 +79,8 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 nnoremap <silent> <leader>o :FzfFiles<CR>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
 "Auto close NERDtree after open file
 let NERDTreeQuitOnOpen=1
 let g:NERDTreeShowLineNumbers=1
@@ -86,4 +90,5 @@ set relativenumber
 set guifont=h24
 set hlsearch
 
-
+syntax on
+filetype indent plugin on
