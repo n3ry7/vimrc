@@ -16,8 +16,9 @@ Plug 'lervag/vimtex'
 Plug 'vim-syntastic/syntastic'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-surround'
 call plug#end()
-"end plugin manager
+
 
 "Python stuff
 let g:repl_program = {
@@ -44,9 +45,9 @@ let g:repl_position = 3
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-d>"
-let g:UltiSnipsJumpBackwardTrigger="<c-a>"
-let g:AutoPairsShortcutJump = '<c-e>'
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+let g:AutoPairsShortcutJump = '<S-tab>'
 "List Snippets
 
 
@@ -90,5 +91,16 @@ set relativenumber
 set guifont=h24
 set hlsearch
 
+"Auto save and load folds
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
+
+"Open help and docs on vertical right
+augroup helpfiles
+  au!
+  au BufRead,BufEnter */doc/* wincmd L
+augroup END
+
+let python_highlight_all=1
 syntax on
 filetype indent plugin on
