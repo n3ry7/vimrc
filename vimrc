@@ -35,25 +35,26 @@ let g:repl_predefine_python = {
 let g:repl_cursor_down = 1
 let g:repl_python_automerge = 1
 let g:repl_ipython_version = '7'
+let g:repl_output_copy_to_register = "t"
 nnoremap <leader>r :REPLToggle<Cr>
 let g:repl_position = 3
-" Track the engine.
+au FileType python setl ofu=python3complete#Complete
 
-
-" Snippets are separated from the engine. Add this if you want them:
-
+" Super tab
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-h>"
-let g:AutoPairsShortcutJump = '<S-tab>'
+let g:UltiSnipsJumpForwardTrigger="<c-Down>"
+let g:UltiSnipsJumpBackwardTrigger="<c-Up>"
+let g:AutoPairsShortcutJump = '<c-=>'
 "List Snippets
 
 
 "corrects tex empty file type
 let g:tex_flavor = "latex"
-autocmd FileType tex set textwidth=62 wrap
+autocmd FileType tex set textwidth=64 wrap
 let g:vimtex_mappings_enabled=1
 let g:vimtex_quickfix_ignore_all_warnings = 0
 let g:vimtex_view_general_viewer = 'okular'
@@ -66,8 +67,7 @@ let maplocalleader=" "
 
 map <leader>so :source ~/.vimrc<CR>
 map QQ :q!<CR>
-map <localleader>W :w!<CR>
-map <localleader>e :e! .vimrc<CR>
+map <leader>e :e! .vimrc<CR>
 map <leader>n :NERDTree<CR>
 map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>
 noremap <Leader>y "+y
@@ -80,6 +80,10 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 nnoremap <silent> <leader>o :FzfFiles<CR>
+nnoremap <silent> <C-Left> :bprevious<CR>
+nnoremap <silent> <C-Right> :bnext<CR>
+
+
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 "Auto close NERDtree after open file
@@ -90,6 +94,11 @@ set mouse=a
 set relativenumber
 set guifont=h24
 set hlsearch
+set incsearch
+set winwidth=68
+set modeline
+set ignorecase
+set smartcase
 
 "Auto save and load folds
 autocmd BufWinLeave *.* mkview
@@ -102,5 +111,9 @@ augroup helpfiles
 augroup END
 
 let python_highlight_all=1
+filetype on
 syntax on
 filetype indent plugin on
+set guifont=Hack\ 16
+
+
