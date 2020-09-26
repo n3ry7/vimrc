@@ -48,7 +48,7 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-Down>"
 let g:UltiSnipsJumpBackwardTrigger="<c-Up>"
-let g:AutoPairsShortcutJump = '<c-=>'
+let g:AutoPairsShortcutJump = '<s-tab>'
 "List Snippets
 
 
@@ -56,8 +56,10 @@ let g:AutoPairsShortcutJump = '<c-=>'
 let g:tex_flavor = "latex"
 autocmd FileType tex set textwidth=64 wrap
 let g:vimtex_mappings_enabled=1
-let g:vimtex_quickfix_ignore_all_warnings = 0
 let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'Warnings',
+      \]
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
 let g:vimtex_quickfix_mode = 2
