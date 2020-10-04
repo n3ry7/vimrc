@@ -13,8 +13,10 @@ endif
 "start plugin manager
 call plug#begin()
 Plug 'scrooloose/nerdtree'
+Plug 'dikiaap/minimalist'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wfxr/minimap.vim'
+Plug 'ekiim/vim-mathpix'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
@@ -68,6 +70,7 @@ let g:VimuxHeight = "34"
 "Slimux
 map  <Leader>w :SlimuxREPLSendLine<CR>:<C-u>call search('^.\+')<CR>
 vmap <Leader>w :SlimuxREPLSendSelection<CR>
+vmap <Leader>rc :SlimuxREPLConfigure<CR>
 map  <f5> :SlimuxREPLSendBuffer<CR>
 
 " Super tab
@@ -86,8 +89,18 @@ let g:AutoPairsShortcutJump = '<s-tab>'
 "corrects tex empty file type
 let g:tex_flavor = "latex"
 autocmd FileType tex set textwidth=64 wrap
-let g:vimtex_mappings_enabled=1
-let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_mappings_enabled= 1
+let g:vimtex_toc_hide_help = 1
+" let g:vimtex_view_general_viewer = 'okular'
+let g:xwindow_id = system('xdotool getactivewindow')
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_zathura_hook_view = 'MyHook'
+let g:vimtex_view_zathura_hook_callback = 'MyHook'
+
+function! MyHook()
+  silent call system('xdotool windowactivate ' . g:xwindow_id . ' --sync')
+endfunction
+
 let g:vimtex_quickfix_ignore_filters = [
       \ 'Warnings',
       \]
