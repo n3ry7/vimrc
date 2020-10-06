@@ -22,10 +22,10 @@ Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ludovicchabant/vim-gutentags'
-"Plug 'sillybun/vim-repl'
-Plug 'benmills/vimux'
-Plug 'esamattis/slimux'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'sillybun/vim-repl'
+" Plug 'benmills/vimux'
+" Plug 'esamattis/slimux'
+" Plug 'christoomey/vim-tmux-navigator'
 Plug 'lervag/vimtex'
 Plug 'vim-syntastic/syntastic'
 Plug 'junegunn/fzf'
@@ -39,39 +39,46 @@ Plug 'tpope/vim-commentary'
 call plug#end()
 
 
-"Python stuff
-" let g:repl_program = {
-"             \   'python': 'ipython',
-"             \   'default': 'zsh',
-"             \   'r': 'R',
-"             \   'lua': 'lua',
-"             \   'vim': 'vim -e',
-"             \   }
-"let g:repl_predefine_python = {
-"             \   'numpy': 'import numpy as np',
-"             \   'matplotlib': 'from matplotlib import pyplot as plt'
-"             \   }
-" let g:repl_cursor_down = 1
-" let g:repl_python_automerge = 1
-" let g:repl_ipython_version = '7'
-" let g:repl_output_copy_to_register = "t"
-" nnoremap <leader>r :REPLToggle<Cr>
-" let g:repl_position = 3
+" Python stuff REPL
+let g:repl_program = {
+            \   'python': 'ipython',
+            \   'default': 'zsh',
+            \   'r': 'R',
+            \   'lua': 'lua',
+            \   'vim': 'vim -e',
+            \   }
+let g:repl_predefine_python = {
+            \   'numpy': 'import numpy as np',
+            \   'matplotlib': 'from matplotlib import pyplot as plt'
+            \   }
+let g:repl_cursor_down = 1
+let g:repl_python_automerge = 1
+let g:repl_ipython_version = '7'
+let g:repl_output_copy_to_register = "t"
+nnoremap <leader>r :REPLToggle<Cr>
+nnoremap <leader>h :REPLHide<Cr>
+let g:repl_position = 3
+autocmd Filetype python nnoremap <F12> <Esc>:REPLDebugStopAtCurrentLine<Cr>
+autocmd Filetype python nnoremap <F10> <Esc>:REPLPDBN<Cr>
+autocmd Filetype python nnoremap <F11> <Esc>:REPLPDBS<Cr>
+tnoremap <C-n> <C-w>N
+tnoremap <ScrollWheelUp> <C-w>Nk
+tnoremap <ScrollWheelDown> <C-w>Nj
+
+
 au FileType python setl ofu=python3complete#Complete
 
 "Vimux
-map <Leader>vp :VimuxPromptCommand<CR>
-map <Leader>q :VimuxCloseRunner<CR>
-map <Leader>vz :call VimuxZoomRunner()<CR>
- map <Leader>vx :VimuxInterruptRunner<CR>
-map <Leader>r :VimuxPromptCommand<CR>ipython<CR>:SlimuxREPLConfigure<CR>
-let g:VimuxOrientation = "h"
-let g:VimuxHeight = "34"
-"Slimux
-map  <Leader>w :SlimuxREPLSendLine<CR>:<C-u>call search('^.\+')<CR>
-vmap <Leader>w :SlimuxREPLSendSelection<CR>
-vmap <Leader>rc :SlimuxREPLConfigure<CR>
-map  <f5> :SlimuxREPLSendBuffer<CR>
+"map <Leader>vz :call VimuxZoomRunner()<CR>
+" map <Leader>vx :VimuxInterruptRunner<CR>
+"map <Leader>r :VimuxPromptCommand<CR>ipython<CR>:SlimuxREPLConfigure<CR>
+"let g:VimuxOrientation = "h"
+"let g:VimuxHeight = "34"
+""Slimux
+"map  <Leader>w :SlimuxREPLSendLine<CR>:<C-u>call search('^.\+')<CR>
+"vmap <Leader>w :SlimuxREPLSendSelection<CR>
+"vmap <Leader>rc :SlimuxREPLConfigure<CR>
+"map  <f5> :SlimuxREPLSendBuffer<CR>
 
 " Super tab
 let g:SuperTabDefaultCompletionType = "context"
@@ -117,6 +124,8 @@ map <leader>e :e! .vimrc<CR>
 map <leader>et :e! .tmux.conf<CR>
 map <leader>n :NERDTree<CR>
 map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>
+map <leader>+ yyp:s/\d\+/\=(submatch(0)+1)/g<CR>
+
 noremap <Leader>y "+y
 noremap <Leader>p "+p
 nnoremap <leader>hl :set hlsearch!<CR>
@@ -165,6 +174,9 @@ set omnifunc=syntaxcomplete#Complete
 "Auto save and load folds
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
+
+" Unlist terminal buffers
+autocmd TerminalOpen * if bufwinnr('') > 0 | setlocal nobuflisted | endif
 
 "Open help and docs on vertical right
 augroup helpfiles
