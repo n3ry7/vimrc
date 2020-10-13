@@ -23,19 +23,15 @@ Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'sillybun/vim-repl'
-" Plug 'benmills/vimux'
-" Plug 'esamattis/slimux'
-" Plug 'christoomey/vim-tmux-navigator'
 Plug 'lervag/vimtex'
 Plug 'vim-syntastic/syntastic'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-"Plug 'prabirshrestha/vim-lsp'
-"Plug 'mattn/vim-lsp-settings'
-"Plug 'prabirshrestha/asyncomplete.vim'
-"Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'wellle/targets.vim'
+Plug 'justinmk/vim-sneak'
 call plug#end()
 
 
@@ -86,9 +82,9 @@ let g:SuperTabCrMapping = 1
 let g:SuperTabClosePreviewOnPopupClose = 1
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-Down>"
-let g:UltiSnipsJumpBackwardTrigger="<c-Up>"
-let g:AutoPairsShortcutJump = '<s-tab>'
+let g:UltiSnipsJumpForwardTrigger="<c-Right>"
+let g:UltiSnipsJumpBackwardTrigger="<c-Left>"
+let g:AutoPairsShortcutJump = '<s-esc>'
 "inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "List Snippets
 
@@ -115,7 +111,9 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 let g:vimtex_view_general_options_latexmk = '--unique'
 let g:vimtex_quickfix_mode = 0
 let g:vimtex_quickfix_open_on_warning = 0
-let mapleader='\' 
+let mapleader = '\'	
+map ç \
+nmap <tab> \
 let maplocalleader=" "
 
 map <leader>so :source ~/.vimrc<CR>
