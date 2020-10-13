@@ -1,0 +1,21 @@
+clear lock
+clear control
+add control = Caps_Lock Control_L Control_R
+keycode   9 = ISO_Level3_Shift quotedbl asciitilde  Escape Escape
+keycode  10 = 1 exclam asciicircum exclam onesuperior exclamdown
+keycode  11 = 2 at dollar at twosuperior dead_doubleacute
+keycode 66 = Escape copyright currency Caps_Lock
+keycode  22 = BackSpace asciitilde Delete BackSpace Delete
+keycode  23 = Tab Ntilde notsign Ntilde Ntilde Ntilde Ntilde Ntilde
+keycode  47 = ccedilla Ccedilla apostrophe quotedbl apostrophe quotedbl
+keycode  48 = semicolon colon degree colon paragraph degree
+keycode  51 = Mode_switch Mode_switch backslash bar backslash bar
+keycode 108 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift NoSymbol ISO_Level3_Shift ISO_Level3_Shift
+keycode 135 = Super_R NoSymbol Super_R NoSymbol Menu
+keycode  34 = dead_acute dead_grave bracketleft braceleft
+keycode  35 = dead_tilde dead_circumflex bracketright braceright asciitilde
+keycode 38 = a A Left atilde aacute acircumflex
+keycode 39 = s S Down NoSymbol 
+keycode 40 = d D Right NoSymbol 
+keycode 25 = w W Up NoSymbol 
+keycode 54 = c C ccedilla Ccedilla cent
