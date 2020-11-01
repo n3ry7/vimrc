@@ -1,9 +1,13 @@
 clear lock
 clear control
+remove mod4 = Super_R
+
+keycode 134 = Mode_switch NoSymbol Super_R NoSymbol NoSymbol
+add mod4 = Super_L
 add control = Caps_Lock Control_L Control_R Tab
-keycode 66 = Escape Caps_Lock NoSymbol NoSymbol Caps_Lock
+keycode 66 = Control_L Caps_Lock NoSymbol NoSymbol Caps_Lock
 keycode 48 = dead_tilde dead_circumflex dead_diaeresis dead_acute asciicircum asciitilde apostrophe quotedbl apostrophe quotedbl
-keycode 38 = a A Left Left Left Left
-keycode 39 = s S Down Down Down Down
-keycode 40 = d D Right Right Right Right
-keycode 25 = w W Up Up Up Up 
+keycode 38 = a A asciicircum Left Left Left
+keycode 39 = s S asciitilde Down Down Down
+keycode 40 = d D dollar Right Right Right
+keycode 25 = w W exclamdown Up Up Up

@@ -12,19 +12,17 @@ endif
 
 "start plugin manager
 call plug#begin()
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'dikiaap/minimalist'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wfxr/minimap.vim'
 Plug 'ekiim/vim-mathpix'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'sillybun/vim-repl'
 Plug 'lervag/vimtex'
-Plug 'vim-syntastic/syntastic'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
@@ -63,46 +61,21 @@ tnoremap <ScrollWheelDown> <C-w>Nj
 
 
 au FileType python setl ofu=python3complete#Complete
-
-"Vimux
-"map <Leader>vz :call VimuxZoomRunner()<CR>
-" map <Leader>vx :VimuxInterruptRunner<CR>
-"map <Leader>r :VimuxPromptCommand<CR>ipython<CR>:SlimuxREPLConfigure<CR>
-"let g:VimuxOrientation = "h"
-"let g:VimuxHeight = "34"
-""Slimux
-"map  <Leader>w :SlimuxREPLSendLine<CR>:<C-u>call search('^.\+')<CR>
-"vmap <Leader>w :SlimuxREPLSendSelection<CR>
-"vmap <Leader>rc :SlimuxREPLConfigure<CR>
-"map  <f5> :SlimuxREPLSendBuffer<CR>
-
-" Super tab
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabCrMapping = 1
-let g:SuperTabClosePreviewOnPopupClose = 1
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-Right>"
-let g:UltiSnipsJumpBackwardTrigger="<c-Left>"
-let g:AutoPairsShortcutJump = '<s-esc>'
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"List Snippets
+let g:AutoPairsShortcutJump = '<s-tab>'
 
 
 "corrects tex empty file type
 let g:tex_flavor = "latex"
 autocmd FileType tex set textwidth=64 wrap
 let g:vimtex_mappings_enabled= 1
-let g:vimtex_toc_hide_help = 1
-" let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_toc_config ={
+		\ 'show_help' : '0',
+		\ 	 }
 let g:xwindow_id = system('xdotool getactivewindow')
 let g:vimtex_view_method = 'zathura'
-let g:vimtex_view_zathura_hook_view = 'MyHook'
-let g:vimtex_view_zathura_hook_callback = 'MyHook'
+map <leader>il = :Img2Latex<CR>
+map <leader>it = :Img2Text<CR>
 
-function! MyHook()
-  silent call system('xdotool windowactivate ' . g:xwindow_id . ' --sync')
-endfunction
 
 let g:vimtex_quickfix_ignore_filters = [
       \ 'Warnings',
@@ -113,7 +86,6 @@ let g:vimtex_quickfix_mode = 0
 let g:vimtex_quickfix_open_on_warning = 0
 let mapleader = '\'	
 map ç \
-nmap <tab> \
 let maplocalleader=" "
 
 map <leader>so :source ~/.vimrc<CR>
@@ -123,6 +95,8 @@ map <leader>et :e! .tmux.conf<CR>
 map <leader>n :NERDTree<CR>
 map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>
 map <leader>+ yyp:s/\d\+/\=(submatch(0)+1)/g<CR>
+map ¡ <c-y>
+map ~ <c-e>
 
 noremap <Leader>y "+y
 noremap <Leader>p "+p
@@ -144,8 +118,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <silent> <leader>o :FZF<CR>
-nnoremap <silent> ² :bprevious<CR>
-nnoremap <silent> ¹ :bnext<CR>
+nnoremap <silent> ² :bprevious!<CR>
+nnoremap <silent> ¹ :bnext!<CR>
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
@@ -188,3 +162,4 @@ syntax on
 filetype indent plugin on
 set guifont=Hack\ 16
 
+source ~/.cocconfig.vim
