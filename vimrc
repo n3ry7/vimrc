@@ -15,7 +15,7 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'dikiaap/minimalist'
-Plug 'jeetsukumaran/vim-buffergator'
+" Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wfxr/minimap.vim'
 Plug 'ekiim/vim-mathpix'
 Plug 'honza/vim-snippets'
@@ -30,6 +30,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'wellle/targets.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'voldikss/vim-translator'
 call plug#end()
 
 
@@ -88,6 +89,19 @@ let mapleader = '\'
 map ç \
 let maplocalleader=" "
 
+" vim translator
+let g:translator_target_lang = 'en'
+let g:translator_source_lang = 'de'
+let g:translator_history_enable = 1
+let g:translator_enable_history  = 1
+nmap <silent> <Leader>t <Plug>Translate
+vmap <silent> <Leader>t <Plug>TranslateV
+nmap <silent> <localLeader>w <Plug>TranslateW
+vmap <silent> <localleader>w <Plug>TranslateWV
+" Replace the text with translation
+nmap <silent> <localLeader>tr <Plug>TranslateR
+vmap <silent> <localLeader>tr <Plug>TranslateRV
+
 map <leader>so :source ~/.vimrc<CR>
 map QQ :q!<CR>
 map <leader>e :e! .vimrc<CR>
@@ -95,6 +109,7 @@ map <leader>et :e! .tmux.conf<CR>
 map <leader>n :NERDTree<CR>
 map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>
 map <leader>+ yyp:s/\d\+/\=(submatch(0)+1)/g<CR>
+map <localleader>fp :%s/\v[ ]*([^\.]*\.)/\1\r\r/g<cr>
 map ¡ <c-y>
 map ~ <c-e>
 
