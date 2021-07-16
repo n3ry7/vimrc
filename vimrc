@@ -15,13 +15,14 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'dikiaap/minimalist'
-" Plug 'jeetsukumaran/vim-buffergator'
+Plug 'lervag/wiki.vim'
 Plug 'wfxr/minimap.vim'
 Plug 'ekiim/vim-mathpix'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'sillybun/vim-repl'
+Plug 'goerz/jupytext.vim'
 Plug 'lervag/vimtex'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -31,6 +32,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'wellle/targets.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'voldikss/vim-translator'
+Plug 'voldikss/vim-floaterm'
+Plug 'mattn/calendar-vim'
+Plug 'cespare/vim-toml'
+
 call plug#end()
 
 
@@ -64,6 +69,9 @@ tnoremap <ScrollWheelDown> <C-w>Nj
 au FileType python setl ofu=python3complete#Complete
 let g:AutoPairsShortcutJump = '<s-tab>'
 
+"Jupytext
+let g:jupytext_fmt = 'py'
+
 
 "corrects tex empty file type
 let g:tex_flavor = "latex"
@@ -86,7 +94,7 @@ let g:vimtex_view_general_options_latexmk = '--unique'
 let g:vimtex_quickfix_mode = 0
 let g:vimtex_quickfix_open_on_warning = 0
 let mapleader = '\'	
-map ç \
+map ç <leader>
 let maplocalleader=" "
 
 " vim translator
@@ -110,8 +118,6 @@ map <leader>n :NERDTree<CR>
 map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>
 map <leader>+ yyp:s/\d\+/\=(submatch(0)+1)/g<CR>
 map <localleader>fp :%s/\v[ ]*([^\.]*\.)/\1\r\r/g<cr>
-map ¡ <c-y>
-map ~ <c-e>
 
 noremap <Leader>y "+y
 noremap <Leader>p "+p
@@ -119,6 +125,7 @@ nnoremap <leader>hl :set hlsearch!<CR>
 nnoremap <leader>m :MinimapToggle<CR><C-w><c-w>
 
 "Fuzzy finder
+map <leader>f :Files<CR>
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
@@ -144,6 +151,65 @@ let g:NERDTreeShowLineNumbers=1
 let NERDTreeHighlightCursorline=0
 autocmd FileType nerdtree setlocal relativenumber
 
+"wiki
+let g:wiki_root = '~/wiki'
+let g:wiki_journal = {
+                \ 'name': 'journal',
+        \ 'frequency': 'daily',
+        \ 'date_format': {
+                \   'daily' : '%d-%m-%Y',
+        \   'weekly' : 'w%V_%Y',
+        \   'monthly' : 'm%m_%Y',
+        \ },
+        \}
+let g:wiki_export = {
+	        \ 'args' : '',
+        \ 'from_format' : 'markdown',
+        \ 'ext' : 'pdf',
+        \ 'link_ext_replace': v:false,
+        \ 'view' : v:true,
+        \ 'output': fnamemodify(tempname(), ':h'),
+        \}
+let g:wiki_write_on_nav = 1
+
+let g:wiki_map_create_page = 'NamePage'
+
+function NamePage(name) abort
+	let l:name = wiki#get_root() . '/' . a:name
+	" If the file is new, then append the current date
+	return filereadable(l:name)
+		\ ? a:name
+		\ : a:name . '_' . strftime('%Y%m%d')
+endfunction
+
+
+let g:wiki_filetypes = ['md']
+
+autocmd FileType markdown map PP <plug>(wiki-export)
+autocmd FileType markdown set formatoptions+=a
+autocmd FileType markdown set spell! spelllang=en_us,pt
+autocmd BufNewFile ~/wiki/*.md norm "%pxxx^df/df/df/ I#    
+
+"vim-calendar
+"let g:calendar_keys = { 'goto_next_month': '<C-Right>', 'goto_prev_month':
+"'<C-Left>', 'goto_prev_year': '<C-Down>', 'goto_next_year': '<C-Up>'}
+let g:calendar_keys = {'goto_next_month': '<C-Right>',       	'goto_prev_month': '<C-Left>',	'goto_prev_year': '<C-Down>',	'goto_next_year': '<C-Up>',	}
+
+"markdown
+augroup Markdown
+	autocmd!
+	autocmd FileType markdown set wrap
+augroup END
+
+"markdown previwer
+let g:md_pdf_viewer="okular"
+
+
+"floaterm 
+let g:floaterm_autoclose = 2
+map <leader>z :FloatermNew bash /usr/bin/notetaker<CR>
+
+"theme
 set t_Co=256
 colorscheme minimalist
 set background=dark
@@ -172,6 +238,7 @@ augroup helpfiles
 augroup END
 
 let python_highlight_all=1
+set nocompatible
 filetype on
 syntax on
 filetype indent plugin on

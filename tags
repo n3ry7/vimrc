@@ -1,11 +1,14 @@
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
 !_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/nery/vimrc/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
-!_TAG_PROGRAM_VERSION	0.0.0	/a3c87ab5/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210110.0/
 <C-Down>	vimrc	/^nnoremap <C-Down> <C-W><C-J>$/;"	m
 <C-H>	vimrc	/^nnoremap <C-H> <C-W><C-H>$/;"	m
 <C-J>	vimrc	/^nnoremap <C-J> <C-W><C-J>$/;"	m
@@ -14,37 +17,76 @@
 <C-Left>	vimrc	/^nnoremap <C-Left> <C-W><C-H>$/;"	m
 <C-Right>	vimrc	/^nnoremap <C-Right> <C-W><C-L>$/;"	m
 <C-Up>	vimrc	/^nnoremap <C-Up> <C-W><C-K>$/;"	m
+<C-b>	cocconfig.vim	/^  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\\<c-r>=coc#float#scroll(0)\\</;"	m
+<C-b>	cocconfig.vim	/^  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\\<C-b>"$/;"	m
+<C-b>	cocconfig.vim	/^  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\\<C-b>"$/;"	m
+<C-f>	cocconfig.vim	/^  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\\<c-r>=coc#float#scroll(1)\\</;"	m
+<C-f>	cocconfig.vim	/^  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\\<C-f>"$/;"	m
+<C-f>	cocconfig.vim	/^  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\\<C-f>"$/;"	m
+<C-s>	cocconfig.vim	/^nmap <silent> <C-s> <Plug>(coc-range-select)$/;"	m
+<C-s>	cocconfig.vim	/^xmap <silent> <C-s> <Plug>(coc-range-select)$/;"	m
 <Leader>p	vimrc	/^noremap <Leader>p "+p$/;"	m
+<Leader>t	vimrc	/^nmap <silent> <Leader>t <Plug>Translate$/;"	m
+<Leader>t	vimrc	/^vmap <silent> <Leader>t <Plug>TranslateV$/;"	m
 <Leader>y	vimrc	/^noremap <Leader>y "+y$/;"	m
+<S-TAB>	cocconfig.vim	/^inoremap <expr><S-TAB> pumvisible() ? "\\<C-p>" : "\\<C-h>"$/;"	m
+<TAB>	cocconfig.vim	/^inoremap <silent><expr> <TAB>$/;"	m
+<c-@>	cocconfig.vim	/^  inoremap <silent><expr> <c-@> coc#refresh()$/;"	m
+<c-space>	cocconfig.vim	/^  inoremap <silent><expr> <c-space> coc#refresh()$/;"	m
 <c-x><c-f>	vimrc	/^imap <c-x><c-f> <plug>(fzf-complete-path)$/;"	m
 <c-x><c-j>	vimrc	/^imap <c-x><c-j> <plug>(fzf-complete-file-ag)$/;"	m
 <c-x><c-k>	vimrc	/^imap <c-x><c-k> <plug>(fzf-complete-word)$/;"	m
 <c-x><c-l>	vimrc	/^imap <c-x><c-l> <plug>(fzf-complete-line)$/;"	m
+<cr>	cocconfig.vim	/^inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()$/;"	m
 <leader>+	vimrc	/^map <leader>+ yyp:s\/\\d\\+\/\\=(submatch(0)+1)\/g<CR>$/;"	m
+<leader>a	cocconfig.vim	/^nmap <leader>a  <Plug>(coc-codeaction-selected)$/;"	m
+<leader>a	cocconfig.vim	/^xmap <leader>a  <Plug>(coc-codeaction-selected)$/;"	m
+<leader>ac	cocconfig.vim	/^nmap <leader>ac  <Plug>(coc-codeaction)$/;"	m
 <leader>e	vimrc	/^map <leader>e :e! .vimrc<CR>$/;"	m
 <leader>et	vimrc	/^map <leader>et :e! .tmux.conf<CR>$/;"	m
+<leader>f	cocconfig.vim	/^nmap <leader>f  <Plug>(coc-format-selected)$/;"	m
+<leader>f	cocconfig.vim	/^xmap <leader>f  <Plug>(coc-format-selected)$/;"	m
 <leader>ge	gvimrc	/^nnoremap <leader>ge :e ~\/.gvimrc<CR>$/;"	m
 <leader>h	vimrc	/^nnoremap <leader>h :REPLHide<Cr>$/;"	m
 <leader>hl	vimrc	/^nnoremap <leader>hl :set hlsearch!<CR>$/;"	m
+<leader>il	vimrc	/^map <leader>il = :Img2Latex<CR>$/;"	m
+<leader>it	vimrc	/^map <leader>it = :Img2Text<CR>$/;"	m
 <leader>m	vimrc	/^nnoremap <leader>m :MinimapToggle<CR><C-w><c-w>$/;"	m
 <leader>n	vimrc	/^map <leader>n :NERDTree<CR>$/;"	m
 <leader>o	vimrc	/^nnoremap <silent> <leader>o :FZF<CR>$/;"	m
+<leader>qf	cocconfig.vim	/^nmap <leader>qf  <Plug>(coc-fix-current)$/;"	m
 <leader>r	vimrc	/^nnoremap <leader>r :REPLToggle<Cr>$/;"	m
+<leader>rn	cocconfig.vim	/^nmap <leader>rn <Plug>(coc-rename)$/;"	m
 <leader>sc	vimrc	/^map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>$/;"	m
 <leader>so	vimrc	/^map <leader>so :source ~\/.vimrc<CR>$/;"	m
-<tab>	vimrc	/^nmap <tab> \\$/;"	m
-MyHook	vimrc	/^function! MyHook()$/;"	f
+<localLeader>tr	vimrc	/^nmap <silent> <localLeader>tr <Plug>TranslateR$/;"	m
+<localLeader>tr	vimrc	/^vmap <silent> <localLeader>tr <Plug>TranslateRV$/;"	m
+<localLeader>w	vimrc	/^nmap <silent> <localLeader>w <Plug>TranslateW$/;"	m
+<localleader>fp	vimrc	/^map <localleader>fp :%s\/\\v[ ]*([^\\.]*\\.)\/\\1\\r\\r\/g<cr>$/;"	m
+<localleader>w	vimrc	/^vmap <silent> <localleader>w <Plug>TranslateWV$/;"	m
+<space>a	cocconfig.vim	/^nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>$/;"	m
+<space>c	cocconfig.vim	/^nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>$/;"	m
+<space>e	cocconfig.vim	/^nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>$/;"	m
+<space>j	cocconfig.vim	/^nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>$/;"	m
+<space>k	cocconfig.vim	/^nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>$/;"	m
+<space>o	cocconfig.vim	/^nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>$/;"	m
+<space>p	cocconfig.vim	/^nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>$/;"	m
+<space>s	cocconfig.vim	/^nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>$/;"	m
+Fold	cocconfig.vim	/^command! -nargs=? Fold :call     CocAction('fold', <f-args>)$/;"	c
+Format	cocconfig.vim	/^command! -nargs=0 Format :call CocAction('format')$/;"	c
+K	cocconfig.vim	/^nnoremap <silent> K :call <SID>show_documentation()<CR>$/;"	m
 NERDTreeHighlightCursorline	vimrc	/^let NERDTreeHighlightCursorline=0$/;"	v
 NERDTreeQuitOnOpen	vimrc	/^let NERDTreeQuitOnOpen=1$/;"	v
+OR	cocconfig.vim	/^command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')$/;"	c
 QQ	vimrc	/^map QQ :q!<CR>$/;"	m
-g:AutoPairsShortcutJump	vimrc	/^let g:AutoPairsShortcutJump = '<s-esc>'$/;"	v
+[g	cocconfig.vim	/^nmap <silent> [g <Plug>(coc-diagnostic-prev)$/;"	m
+]g	cocconfig.vim	/^nmap <silent> ]g <Plug>(coc-diagnostic-next)$/;"	m
+ac	cocconfig.vim	/^omap ac <Plug>(coc-classobj-a)$/;"	m
+ac	cocconfig.vim	/^xmap ac <Plug>(coc-classobj-a)$/;"	m
+af	cocconfig.vim	/^omap af <Plug>(coc-funcobj-a)$/;"	m
+af	cocconfig.vim	/^xmap af <Plug>(coc-funcobj-a)$/;"	m
+g:AutoPairsShortcutJump	vimrc	/^let g:AutoPairsShortcutJump = '<s-tab>'$/;"	v
 g:NERDTreeShowLineNumbers	vimrc	/^let g:NERDTreeShowLineNumbers=1$/;"	v
-g:SuperTabClosePreviewOnPopupClose	vimrc	/^let g:SuperTabClosePreviewOnPopupClose = 1$/;"	v
-g:SuperTabCrMapping	vimrc	/^let g:SuperTabCrMapping = 1$/;"	v
-g:SuperTabDefaultCompletionType	vimrc	/^let g:SuperTabDefaultCompletionType = "context"$/;"	v
-g:UltiSnipsExpandTrigger	vimrc	/^let g:UltiSnipsExpandTrigger="<tab>"$/;"	v
-g:UltiSnipsJumpBackwardTrigger	vimrc	/^let g:UltiSnipsJumpBackwardTrigger="<c-Left>"$/;"	v
-g:UltiSnipsJumpForwardTrigger	vimrc	/^let g:UltiSnipsJumpForwardTrigger="<c-Right>"$/;"	v
 g:fzf_layout	vimrc	/^let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }$/;"	v
 g:repl_cursor_down	vimrc	/^let g:repl_cursor_down = 1$/;"	v
 g:repl_ipython_version	vimrc	/^let g:repl_ipython_version = '7'$/;"	v
@@ -54,23 +96,36 @@ g:repl_predefine_python	vimrc	/^let g:repl_predefine_python = {$/;"	v
 g:repl_program	vimrc	/^let g:repl_program = {$/;"	v
 g:repl_python_automerge	vimrc	/^let g:repl_python_automerge = 1$/;"	v
 g:tex_flavor	vimrc	/^let g:tex_flavor = "latex"$/;"	v
+g:translator_enable_history	vimrc	/^let g:translator_enable_history  = 1$/;"	v
+g:translator_history_enable	vimrc	/^let g:translator_history_enable = 1$/;"	v
+g:translator_source_lang	vimrc	/^let g:translator_source_lang = 'de'$/;"	v
+g:translator_target_lang	vimrc	/^let g:translator_target_lang = 'en'$/;"	v
 g:vimtex_mappings_enabled	vimrc	/^let g:vimtex_mappings_enabled= 1$/;"	v
 g:vimtex_quickfix_ignore_filters	vimrc	/^let g:vimtex_quickfix_ignore_filters = [$/;"	v
 g:vimtex_quickfix_mode	vimrc	/^let g:vimtex_quickfix_mode = 0$/;"	v
 g:vimtex_quickfix_open_on_warning	vimrc	/^let g:vimtex_quickfix_open_on_warning = 0$/;"	v
-g:vimtex_toc_hide_help	vimrc	/^let g:vimtex_toc_hide_help = 1$/;"	v
+g:vimtex_toc_config	vimrc	/^let g:vimtex_toc_config ={$/;"	v
 g:vimtex_view_general_options	vimrc	/^let g:vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'$/;"	v
 g:vimtex_view_general_options_latexmk	vimrc	/^let g:vimtex_view_general_options_latexmk = '--unique'$/;"	v
 g:vimtex_view_method	vimrc	/^let g:vimtex_view_method = 'zathura'$/;"	v
-g:vimtex_view_zathura_hook_callback	vimrc	/^let g:vimtex_view_zathura_hook_callback = 'MyHook'$/;"	v
-g:vimtex_view_zathura_hook_view	vimrc	/^let g:vimtex_view_zathura_hook_view = 'MyHook'$/;"	v
 g:xwindow_id	vimrc	/^let g:xwindow_id = system('xdotool getactivewindow')$/;"	v
+gd	cocconfig.vim	/^nmap <silent> gd <Plug>(coc-definition)$/;"	m
+gi	cocconfig.vim	/^nmap <silent> gi <Plug>(coc-implementation)$/;"	m
+gr	cocconfig.vim	/^nmap <silent> gr <Plug>(coc-references)$/;"	m
+gy	cocconfig.vim	/^nmap <silent> gy <Plug>(coc-type-definition)$/;"	m
 helpfiles	vimrc	/^augroup helpfiles$/;"	a
+ic	cocconfig.vim	/^omap ic <Plug>(coc-classobj-i)$/;"	m
+ic	cocconfig.vim	/^xmap ic <Plug>(coc-classobj-i)$/;"	m
+if	cocconfig.vim	/^omap if <Plug>(coc-funcobj-i)$/;"	m
+if	cocconfig.vim	/^xmap if <Plug>(coc-funcobj-i)$/;"	m
 key	tmux.conf	/^bind-key : command-prompt$/;"	k
 key	tmux.conf	/^bind-key = select-layout main-vertical$/;"	k
 mapleader	vimrc	/^let mapleader = '\\'	$/;"	v
 maplocalleader	vimrc	/^let maplocalleader=" "$/;"	v
+mygroup	cocconfig.vim	/^augroup mygroup$/;"	a
 python_highlight_all	vimrc	/^let python_highlight_all=1$/;"	v
+s:check_back_space	cocconfig.vim	/^function! s:check_back_space() abort$/;"	f
+s:show_documentation	cocconfig.vim	/^function! s:show_documentation()$/;"	f
 ser	read.py	/^ser = serial.Serial('\/dev\/ttyUSB0')  # open serial port$/;"	v
 style bg	tmux.conf	/^set-option -g status-style bg=black$/;"	k
 style fg	tmux.conf	/^set-option -g pane-active-border-style fg=yellow$/;"	k
@@ -78,6 +133,8 @@ style fg	tmux.conf	/^set-option -g pane-border-style fg=cyan$/;"	k
 style fg	tmux.conf	/^set-option -g status-style fg=white$/;"	k
 style fg	tmux.conf	/^set-window-option -g window-status-current-style fg=magenta$/;"	k
 vimvrc	README.md	/^# vimvrc$/;"	c
+~	vimrc	/^map ~ <c-e>$/;"	m
+¡	vimrc	/^map ¡ <c-y>$/;"	m
 ²	vimrc	/^nnoremap <silent> ² :bprevious!<CR>$/;"	m
 ¹	vimrc	/^nnoremap <silent> ¹ :bnext!<CR>$/;"	m
 ç	vimrc	/^map ç \\$/;"	m
