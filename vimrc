@@ -16,7 +16,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
 Plug 'dikiaap/minimalist'
 Plug 'lervag/wiki.vim'
-Plug 'wfxr/minimap.vim'
 Plug 'ekiim/vim-mathpix'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
@@ -158,10 +157,12 @@ let g:wiki_journal = {
         \ 'frequency': 'daily',
         \ 'date_format': {
                 \   'daily' : '%d-%m-%Y',
-        \   'weekly' : 'w%V_%Y',
-        \   'monthly' : 'm%m_%Y',
+        \   'weekly' : '%V_%Y',
+        \   'monthly' : 'm%_%Y',
         \ },
         \}
+let g:wiki_journal.date_format.weekly = '%V_%Y'
+let g:wiki_journal.date_format.monthly = '%V_%Y'
 let g:wiki_export = {
 	        \ 'args' : '',
         \ 'from_format' : 'markdown',
@@ -185,16 +186,18 @@ endfunction
 
 let g:wiki_filetypes = ['md']
 
+"markdown
 autocmd FileType markdown map PP <plug>(wiki-export)
 autocmd FileType markdown set formatoptions+=a
 autocmd FileType markdown set spell! spelllang=en_us,pt
+autocmd FileType markdown set textwidth=69
 autocmd BufNewFile ~/wiki/*.md norm "%pxxx^df/df/df/ I#    
 
 "vim-calendar
 "let g:calendar_keys = { 'goto_next_month': '<C-Right>', 'goto_prev_month':
 "'<C-Left>', 'goto_prev_year': '<C-Down>', 'goto_next_year': '<C-Up>'}
 let g:calendar_keys = {'goto_next_month': '<C-Right>',       	'goto_prev_month': '<C-Left>',	'goto_prev_year': '<C-Down>',	'goto_next_year': '<C-Up>',	}
-
+let g:calendar_diary = '~/wiki/journal'
 "markdown
 augroup Markdown
 	autocmd!

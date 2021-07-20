@@ -46,6 +46,7 @@
 <leader>et	vimrc	/^map <leader>et :e! .tmux.conf<CR>$/;"	m
 <leader>f	cocconfig.vim	/^nmap <leader>f  <Plug>(coc-format-selected)$/;"	m
 <leader>f	cocconfig.vim	/^xmap <leader>f  <Plug>(coc-format-selected)$/;"	m
+<leader>f	vimrc	/^map <leader>f :Files<CR>$/;"	m
 <leader>ge	gvimrc	/^nnoremap <leader>ge :e ~\/.gvimrc<CR>$/;"	m
 <leader>h	vimrc	/^nnoremap <leader>h :REPLHide<Cr>$/;"	m
 <leader>hl	vimrc	/^nnoremap <leader>hl :set hlsearch!<CR>$/;"	m
@@ -59,6 +60,7 @@
 <leader>rn	cocconfig.vim	/^nmap <leader>rn <Plug>(coc-rename)$/;"	m
 <leader>sc	vimrc	/^map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>$/;"	m
 <leader>so	vimrc	/^map <leader>so :source ~\/.vimrc<CR>$/;"	m
+<leader>z	vimrc	/^map <leader>z :FloatermNew bash \/usr\/bin\/notetaker<CR>$/;"	m
 <localLeader>tr	vimrc	/^nmap <silent> <localLeader>tr <Plug>TranslateR$/;"	m
 <localLeader>tr	vimrc	/^vmap <silent> <localLeader>tr <Plug>TranslateRV$/;"	m
 <localLeader>w	vimrc	/^nmap <silent> <localLeader>w <Plug>TranslateW$/;"	m
@@ -75,8 +77,10 @@
 Fold	cocconfig.vim	/^command! -nargs=? Fold :call     CocAction('fold', <f-args>)$/;"	c
 Format	cocconfig.vim	/^command! -nargs=0 Format :call CocAction('format')$/;"	c
 K	cocconfig.vim	/^nnoremap <silent> K :call <SID>show_documentation()<CR>$/;"	m
+Markdown	vimrc	/^augroup Markdown$/;"	a
 NERDTreeHighlightCursorline	vimrc	/^let NERDTreeHighlightCursorline=0$/;"	v
 NERDTreeQuitOnOpen	vimrc	/^let NERDTreeQuitOnOpen=1$/;"	v
+NamePage	vimrc	/^function NamePage(name) abort$/;"	f
 OR	cocconfig.vim	/^command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')$/;"	c
 QQ	vimrc	/^map QQ :q!<CR>$/;"	m
 [g	cocconfig.vim	/^nmap <silent> [g <Plug>(coc-diagnostic-prev)$/;"	m
@@ -87,7 +91,11 @@ af	cocconfig.vim	/^omap af <Plug>(coc-funcobj-a)$/;"	m
 af	cocconfig.vim	/^xmap af <Plug>(coc-funcobj-a)$/;"	m
 g:AutoPairsShortcutJump	vimrc	/^let g:AutoPairsShortcutJump = '<s-tab>'$/;"	v
 g:NERDTreeShowLineNumbers	vimrc	/^let g:NERDTreeShowLineNumbers=1$/;"	v
+g:calendar_keys	vimrc	/^let g:calendar_keys = {'goto_next_month': '<C-Right>',       	'goto_prev_month': '<C-Left>',	'go/;"	v
+g:floaterm_autoclose	vimrc	/^let g:floaterm_autoclose = 2$/;"	v
 g:fzf_layout	vimrc	/^let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }$/;"	v
+g:jupytext_fmt	vimrc	/^let g:jupytext_fmt = 'py'$/;"	v
+g:md_pdf_viewer	vimrc	/^let g:md_pdf_viewer="okular"$/;"	v
 g:repl_cursor_down	vimrc	/^let g:repl_cursor_down = 1$/;"	v
 g:repl_ipython_version	vimrc	/^let g:repl_ipython_version = '7'$/;"	v
 g:repl_output_copy_to_register	vimrc	/^let g:repl_output_copy_to_register = "t"$/;"	v
@@ -108,6 +116,12 @@ g:vimtex_toc_config	vimrc	/^let g:vimtex_toc_config ={$/;"	v
 g:vimtex_view_general_options	vimrc	/^let g:vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'$/;"	v
 g:vimtex_view_general_options_latexmk	vimrc	/^let g:vimtex_view_general_options_latexmk = '--unique'$/;"	v
 g:vimtex_view_method	vimrc	/^let g:vimtex_view_method = 'zathura'$/;"	v
+g:wiki_export	vimrc	/^let g:wiki_export = {$/;"	v
+g:wiki_filetypes	vimrc	/^let g:wiki_filetypes = ['md']$/;"	v
+g:wiki_journal	vimrc	/^let g:wiki_journal = {$/;"	v
+g:wiki_map_create_page	vimrc	/^let g:wiki_map_create_page = 'NamePage'$/;"	v
+g:wiki_root	vimrc	/^let g:wiki_root = '~\/wiki'$/;"	v
+g:wiki_write_on_nav	vimrc	/^let g:wiki_write_on_nav = 1$/;"	v
 g:xwindow_id	vimrc	/^let g:xwindow_id = system('xdotool getactivewindow')$/;"	v
 gd	cocconfig.vim	/^nmap <silent> gd <Plug>(coc-definition)$/;"	m
 gi	cocconfig.vim	/^nmap <silent> gi <Plug>(coc-implementation)$/;"	m
@@ -133,8 +147,6 @@ style fg	tmux.conf	/^set-option -g pane-border-style fg=cyan$/;"	k
 style fg	tmux.conf	/^set-option -g status-style fg=white$/;"	k
 style fg	tmux.conf	/^set-window-option -g window-status-current-style fg=magenta$/;"	k
 vimvrc	README.md	/^# vimvrc$/;"	c
-~	vimrc	/^map ~ <c-e>$/;"	m
-¡	vimrc	/^map ¡ <c-y>$/;"	m
 ²	vimrc	/^nnoremap <silent> ² :bprevious!<CR>$/;"	m
 ¹	vimrc	/^nnoremap <silent> ¹ :bnext!<CR>$/;"	m
-ç	vimrc	/^map ç \\$/;"	m
+ç	vimrc	/^map ç <leader>$/;"	m
