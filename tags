@@ -91,6 +91,7 @@ af	cocconfig.vim	/^omap af <Plug>(coc-funcobj-a)$/;"	m
 af	cocconfig.vim	/^xmap af <Plug>(coc-funcobj-a)$/;"	m
 g:AutoPairsShortcutJump	vimrc	/^let g:AutoPairsShortcutJump = '<s-tab>'$/;"	v
 g:NERDTreeShowLineNumbers	vimrc	/^let g:NERDTreeShowLineNumbers=1$/;"	v
+g:calendar_diary	vimrc	/^let g:calendar_diary = '~\/wiki\/journal'$/;"	v
 g:calendar_keys	vimrc	/^let g:calendar_keys = {'goto_next_month': '<C-Right>',       	'goto_prev_month': '<C-Left>',	'go/;"	v
 g:floaterm_autoclose	vimrc	/^let g:floaterm_autoclose = 2$/;"	v
 g:fzf_layout	vimrc	/^let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }$/;"	v
@@ -119,6 +120,8 @@ g:vimtex_view_method	vimrc	/^let g:vimtex_view_method = 'zathura'$/;"	v
 g:wiki_export	vimrc	/^let g:wiki_export = {$/;"	v
 g:wiki_filetypes	vimrc	/^let g:wiki_filetypes = ['md']$/;"	v
 g:wiki_journal	vimrc	/^let g:wiki_journal = {$/;"	v
+g:wiki_journal	vimrc	/^let g:wiki_journal.date_format.monthly = '%V_%Y'$/;"	v
+g:wiki_journal	vimrc	/^let g:wiki_journal.date_format.weekly = '%V_%Y'$/;"	v
 g:wiki_map_create_page	vimrc	/^let g:wiki_map_create_page = 'NamePage'$/;"	v
 g:wiki_root	vimrc	/^let g:wiki_root = '~\/wiki'$/;"	v
 g:wiki_write_on_nav	vimrc	/^let g:wiki_write_on_nav = 1$/;"	v
