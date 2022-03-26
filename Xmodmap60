@@ -26,10 +26,12 @@ keycode  49 = Escape
 keycode  51 = Mode_switch Mode_switch backslash bar backslash bar
 keycode 108 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift NoSymbol ISO_Level3_Shift ISO_Level3_Shift
 keycode 135 = Super_R NoSymbol Super_R NoSymbol Menu
-keycode  34 = dead_acute dead_grave bracketleft braceleft
-keycode  35 = dead_tilde dead_circumflex bracketright braceright asciitilde
+keycode  34 = Alt_L
+keycode  35 = Control_L
 keycode 38 = a A Left Left Left Left
 keycode 39 = s S Down Down Down Down
 keycode 40 = d D Right Right Right Right
 keycode 25 = w W Up Up Up Up
-
+keycode 182 = backslash
+keycode 127 = dead_acute dead_grave bracketleft braceleft
+keycode 112 = dead_tilde dead_circumflex bracketright braceright asciitilde
