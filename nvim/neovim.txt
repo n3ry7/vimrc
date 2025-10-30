@@ -1,0 +1,1373 @@
+Project Path: nvim
+
+Source Tree:
+
+```
+nvim
+├── init.vim
+├── lazy-lock.json
+├── lua
+│   ├── miscelaneous.lua
+│   ├── misc.lua
+│   ├── treesitter_config.lua
+│   ├── telescope_config.lua
+│   ├── snippets_markdown.lua
+│   ├── cmp_config.lua
+│   ├── vscode_.lua
+│   ├── iron_nvim_config.lua
+│   ├── markdown_config.lua
+│   ├── obsidian_config.lua
+│   ├── lspconfig_config.lua
+│   ├── lazy_config.lua
+│   ├── nvim_tree_config.lua
+│   └── clipboard_image.lua
+├── spell
+│   ├── en.utf-8.add.spl
+│   └── en.utf-8.add
+└── snippets
+    ├── package.json
+    └── gasto.json
+
+```
+
+`/home/nery/.config/nvim/init.vim`:
+
+```vim
+" Set PYTHONPATH to include your Python and Jedi paths
+set shell=/usr/bin/zsh
+set shellcmdflag=-ic
+let $PYTHONPATH='/home/nery/.pyenv/shims'
+
+lua require'lazy_config'
+lua require'lspconfig_config'
+lua require'iron_nvim_config'
+lua require'cmp_config'
+lua require'treesitter_config'
+lua require'telescope_config'
+lua require'markdown_config'
+lua require'nvim_tree_config'
+
+lua require'misc'
+"lua require'create_file_and_open_snippet'
+
+set completeopt=menu,menuone,noselect
+set diffopt=vertical
+
+let g:wiki_root = '~/wiki'
+let g:wiki_filetypes = ['md', 'wiki']
+
+" This is necessary for VimTeX to load properly. The "indent" is optional.
+" Note that most plugin managers will do this automatically.
+filetype plugin indent on
+
+" This enables Vim's and neovim's syntax-related features. Without this, some
+" VimTeX features will not work (see ":help vimtex-requirements" for more
+" info).
+syntax enable
+
+" Viewer options: One may configure the viewer either by specifying a built-in
+" viewer method:
+let g:vimtex_view_method = 'zathura'
+
+" Or with a generic interface:
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
+" see ":help vimtex-compiler".
+let g:vimtex_compiler_method = 'latexrun'
+
+" Most VimTeX mappings rely on localleader and this can be changed with the
+" following line. The default is usually fine and is the symbol "\".
+let maplocalleader = ","
+
+command! CdHome cd ~
+
+let qapleader = '\'
+
+vnoremap G G$
+nnoremap G G$
+vnoremap gg gg0
+nnoremap gg gg0
+
+nnoremap <silent> <leader>gd :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <leader>rn :lua vim.lsp.buf.rename()<CR>
+
+noremap <leader>ed :exe 'edit '.stdpath('config').'/init.vim'<cr>:cd %:h<cr>
+nnoremap <leader>o <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>j <cmd>lua require('telescope.builtin').jumplist()<cr>
+nnoremap <leader>s <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+nnoremap <leader>gr <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>r <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>e <cmd>lua require('telescope.builtin').treesitter()<cr>
+nnoremap <leader>d <cmd>lua require('telescope.builtin').diagnostics({bufnr=0})<cr>
+nnoremap <leader>c <cmd>lua require('telescope.builtin').coqmand_history()<cr>
+nnoremap <leader>m <cmd>lua require('telescope.builtin').marks()<cr>
+nnoremap <leader>q <cmd>lua require('telescope.builtin').quickfix()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+inoremap <C-x><C-o> <Cmd>lua require('cmp').complete()<CR>
+
+nnoremap <silent> rn :lua vim.lsp.buf.rename()<CR>
+
+nnoremap <Space> <Plug>Sneak_s
+nnoremap <Space><BS> <Plug>Sneak_S
+nnoremap <Space><Space> :Pounce<CR>
+
+nnoremap <leader>so :source ~/.config/nvim/init.vim<cr>
+nnoremap <leader>e :Oil<CR>
+nnoremap '' :bd<CR>
+
+"nnoremap <leader>g :Telekasten new_templated_note<CR>
+nnoremap <leader>g :Telekasten new_templated_note<CR>g<C-R>=strftime("%d-%m")<CR><CR>tg
+"jump to edits in note template
+autocmd FileType markdown nnoremap ]] /^##\s\+\w\+\n\zs.*$<CR>A
+autocmd FileType markdown nnoremap [[ ?^##\s\+\w\+\n\zs.*$<CR>A
+
+map <leader>sc :setlocal spell! spelllang=en_us,pt<CR>
+noremap QQ :bd!<CR>
+
+set guifont=Noto_Sans_Regular:h17
+
+
+" . Goto buffer in position...
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
+nmap <leader>0 <Plug>BufTabLine.Go(10)
+
+"theme
+set t_Co=256
+syntax on
+colorscheme minimalist
+" colorscheme material
+let g:material_style = "darker"
+hi BufTabLineFill ctermbg=gray  
+set background=dark
+set mouse=a
+set number
+set hlsearch
+set incsearch
+set winwidth=69
+set modeline
+set ignorecase
+set smartcase
+set omnifunc=syntaxcomplete#Complete
+set timeoutlen=250
+
+hi! @type.python guifg=#d7af00
+hi! @variable.member.python guifg=#5f5faf
+" hi! @variable.parameter.python guifg=#d7875f
+
+let g:loaded_netrwPlugin = 1
+let g:loaded_netrw = 1
+
+
+function! FzfChangeDirectory()
+  let l:dir = fzf#run(fzf#wrap({
+        \ 'source': 'fd --type d --hidden --exclude .git .',
+        \ 'sink': 'cd',
+        \ 'options': '--preview "ls -lA --group-directories-first {} | head -10"',
+        \ 'down': '40%'
+        \ }))
+endfunction
+
+command! CD call FzfChangeDirectory()
+nnoremap <leader>cd :CD<CR>
+
+command! PasteXclipImageToWiki let g:img_count = len(split(globpath(expand('%:p:h') . '/img/', 'img*.png'), '\n')) | let g:img_filename = printf('img%d.png', g:img_count + 1) | silent! execute '!xclip -selection clipboard -t image/png -o > ' . expand('%:p:h') . '/img/' . g:img_filename | execute 'normal! i![](/img/' . g:img_filename . ')<Esc>'
+nnoremap <leader>p :PasteXclipImageToWiki<CR>
+
+```
+
+`/home/nery/.config/nvim/lazy-lock.json`:
+
+```json
+{
+  "LuaSnip": { "branch": "master", "commit": "e808bee352d1a6fcf902ca1a71cee76e60e24071" },
+  "barbar.nvim": { "branch": "master", "commit": "ca1326f7d87acfd47b0cbeeb3bef98cec73a92be" },
+  "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
+  "cmp-cmdline": { "branch": "main", "commit": "d250c63aa13ead745e3a40f61fdd3470efde3923" },
+  "cmp-nvim-lsp": { "branch": "main", "commit": "39e2eda76828d88b773cc27a3f61d2ad782c922d" },
+  "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
+  "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
+  "codeium.nvim": { "branch": "main", "commit": "ca38490ef963b066d6f686146d73213c70ef7f6b" },
+  "friendly-snippets": { "branch": "main", "commit": "de8fce94985873666bd9712ea3e49ee17aadb1ed" },
+  "fzf": { "branch": "master", "commit": "7bd5884d120c4a746813c8de5af9a3186abe4df0" },
+  "fzf.vim": { "branch": "master", "commit": "ec75ffbfd50630bf2b8d444d89487e149bacf7f3" },
+  "glow.nvim": { "branch": "main", "commit": "238070a686c1da3bccccf1079700eb4b5e19aea4" },
+  "goyo.vim": { "branch": "master", "commit": "fa0263d456dd43f5926484d1c4c7022dfcb21ba9" },
+  "iron.nvim": { "branch": "master", "commit": "e6b78ec1bc56eab63b3a9112d348b3d79836b672" },
+  "jupytext.vim": { "branch": "master", "commit": "119d2f63c2c487658a972f0a6b710ed461dfed96" },
+  "lazy.nvim": { "branch": "main", "commit": "1159bdccd8910a0fd0914b24d6c3d186689023d9" },
+  "material.nvim": { "branch": "main", "commit": "ac8f02e97e359b7d258c0a00ec0949fe880790ad" },
+  "minimalist": { "branch": "master", "commit": "74b50e01c4bbd38b45768bc97022f5e6764a3f37" },
+  "monokai.nvim": { "branch": "master", "commit": "b8bd44d5796503173627d7a1fc51f77ec3a08a63" },
+  "neoscroll.nvim": { "branch": "master", "commit": "4e0428a41c6ec191df543fc95349f6e1c598e53f" },
+  "nui.nvim": { "branch": "main", "commit": "b58e2bfda5cea347c9d58b7f11cf3012c7b3953f" },
+  "nvim-autopairs": { "branch": "master", "commit": "ee297f215e95a60b01fde33275cc3c820eddeebe" },
+  "nvim-cmp": { "branch": "main", "commit": "ae644feb7b67bf1ce4260c231d1d4300b19c6f30" },
+  "nvim-dap": { "branch": "master", "commit": "7ff6936010b7222fea2caea0f67ed77f1b7c60dd" },
+  "nvim-lspconfig": { "branch": "master", "commit": "d141895d1d9f41048fff201d62a2d6e96d299e32" },
+  "nvim-tree.lua": { "branch": "master", "commit": "1c9553a19f70df3dcb171546a3d5e034531ef093" },
+  "nvim-treesitter": { "branch": "master", "commit": "5a2ff8b7ca5470b1011ed82ef3fdd53139ffc467" },
+  "nvim-treesitter-textobjects": { "branch": "master", "commit": "3e450cd85243da99dc23ebbf14f9c70e9a0c26a4" },
+  "nvim-web-devicons": { "branch": "master", "commit": "19d257cf889f79f4022163c3fbb5e08639077bd8" },
+  "oil.nvim": { "branch": "master", "commit": "ccab9d5e09e2d0042fbbe5b6bd05e82426247067" },
+  "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
+  "pounce.nvim": { "branch": "master", "commit": "2e36399ac09b517770c459f1a123e6b4b4c1c171" },
+  "rust-tools.nvim": { "branch": "master", "commit": "676187908a1ce35ffcd727c654ed68d851299d3e" },
+  "targets.vim": { "branch": "master", "commit": "6325416da8f89992b005db3e4517aaef0242602e" },
+  "telekasten.nvim": { "branch": "main", "commit": "c1c7a5d56310164f933cfe3ce8232bf95a68083f" },
+  "telescope-file-browser.nvim": { "branch": "master", "commit": "3b8a1e17187cfeedb31decbd625da62398a8ff34" },
+  "telescope.nvim": { "branch": "master", "commit": "df534c3042572fb958586facd02841e10186707c" },
+  "toggle-lsp-diagnostics.nvim": { "branch": "main", "commit": "4c515b1625433306807e4a47756592fde0b83c82" },
+  "vim-buftabline": { "branch": "master", "commit": "73b9ef5dcb6cdf6488bc88adb382f20bc3e3262a" },
+  "vim-commentary": { "branch": "master", "commit": "c4b8f52cbb7142ec239494e5a2c4a512f92c4d07" },
+  "vim-fugitive": { "branch": "master", "commit": "d4877e54cef67f5af4f950935b1ade19ed6b7370" },
+  "vim-python-docstring": { "branch": "master", "commit": "8deaa27ca87dd5f9bba36da41fe77b64312aa51e" },
+  "vim-sneak": { "branch": "master", "commit": "c13d0497139b8796ff9c44ddb9bc0dc9770ad2dd" },
+  "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
+  "vimtex": { "branch": "master", "commit": "a4db0ee3271f58a08596ba853ea1e167f41ff9d6" },
+  "wiki.vim": { "branch": "master", "commit": "8188ff7b62b7695eae44257bd6202d8494fee655" }
+}
+
+```
+
+`/home/nery/.config/nvim/lua/miscelaneous.lua`:
+
+```lua
+require'pounce'.setup{
+accept_keys = "AEPROTKWLSKDJFMGNZXC",
+accept_best_key = "<enter>",
+multi_window = true,
+debug = false,
+}
+
+require'toggle_lsp_diagnostics'.init({ start_on = false }})
+
+-- require('neoscroll').setup({
+-- -- All these keys will be mapped to their corresponding default scrolling animation
+-- mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+-- '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+-- hide_cursor = true,          -- Hide cursor while scrolling
+-- stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+-- respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+-- cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+-- easing_function = nil,       -- Default easing function
+-- pre_hook = nil,              -- Function to run before the scrolling animation starts
+-- post_hook = nil,             -- Function to run after the scrolling animation ends
+-- performance_mode = false,    -- Disable "Performance Mode" on all buffers.
+-- })
+
+require('neoscroll').setup({
+-- All these keys will be mapped to their corresponding default scrolling animation
+mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+'<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+hide_cursor = true,          -- Hide cursor while scrolling
+stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+easing_function = nil,       -- Default easing function
+pre_hook = nil,              -- Function to run before the scrolling animation starts
+post_hook = nil,             -- Function to run after the scrolling animation ends
+performance_mode = false,    -- Disable "Performance Mode" on all buffers.
+})
+
+local t = {}
+-- Syntax: t[keys] = {function, {function arguments}}
+t['<C-a>'] = {'scroll', {'-vim.wo.scroll', 'true', '200'}}
+t['<C-d>'] = {'scroll', { 'vim.wo.scroll', 'true', '200'}}
+t['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '450'}}
+t['<C-u>'] = {'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '450'}}
+t['<C-y>'] = {'scroll', {'-0.10', 'false', '100'}}
+t['<C-e>'] = {'scroll', { '0.10', 'false', '100'}}
+
+
+require("nvim-autopairs").setup {}
+
+local Rule = require('nvim-autopairs.rule')
+local npairs = require('nvim-autopairs')
+local cond = require('nvim-autopairs.conds')
+npairs.add_rules({
+Rule("*", "*"),
+Rule("**", "*"),
+}
+)
+
+
+```
+
+`/home/nery/.config/nvim/lua/misc.lua`:
+
+```lua
+require'pounce'.setup{
+accept_keys = "AEPROTKWLSKDJFMGNZXC",
+accept_best_key = "<enter>",
+multi_window = true,
+debug = false,
+}
+
+
+require'toggle_lsp_diagnostics'.init({ start_on = true })
+require('telekasten').setup({
+      -- Main paths
+      home = '/home/nery/wiki/',        -- path to main notes folder
+      dailies = '/home/nery/wiki/dailies/',       -- path to daily notes
+      weeklies = '/home/nery/wiki/weeklies/',      -- path to weekly notes
+      templates = '/home/nery/wiki/templates/',   -- path to templates
+
+      -- Specific note templates
+        -- set to `nil` or do not specify if you do not want a template
+      template_new_note = '/home/nery/wiki/templates/new_note.md',    -- template for new notes
+      template_new_daily = '/home/nery/wiki/templates/new_daily.md',   -- template for new daily notes
+      template_new_weekly = '/home/nery/wiki/templates/new_weekly.md',  -- template for new weekly notes
+
+      -- Image subdir for pasting
+        -- subdir name
+        -- or nil if pasted images shouldn't go into a special subdir
+      image_subdir = "/home/nery/wiki/img/",
+
+      -- File extension for note files
+      extension    = ".md",
+
+      -- Generate note filenames. One of:
+        -- "title" (default) - Use title if supplied, uuid otherwise
+        -- "uuid" - Use uuid
+        -- "uuid-title" - Prefix title by uuid
+        -- "title-uuid" - Suffix title with uuid
+      new_note_filename = "title",
+      -- file uuid type ("rand" or input for os.date such as "%Y%m%d%H%M")
+      uuid_type = "%Y%m%d%H%M",
+      -- UUID separator
+      uuid_sep = "-",
+
+      -- Flags for creating non-existing notes
+      follow_creates_nonexisting = true,    -- create non-existing on follow
+      dailies_create_nonexisting = true,    -- create non-existing dailies
+      weeklies_create_nonexisting = true,   -- create non-existing weeklies
+
+      -- skip telescope prompt for goto_today and goto_thisweek
+      journal_auto_open = false,
+
+      -- Image link style",
+        -- wiki:     ![[image name]]
+        -- markdown: ![](image_subdir/xxxxx.png)
+      image_link_style = "wiki",
+
+      -- Default sort option: 'filename', 'modified'
+      sort = "filename",
+
+      -- Make syntax available to markdown buffers and telescope previewers
+      install_syntax = true,
+
+      -- Tag notation: '#tag', '@tag', ':tag:', 'yaml-bare'
+      tag_notation = "#tag",
+
+      -- When linking to a note in subdir/, create a [[subdir/title]] link
+      -- instead of a [[title only]] link
+      subdirs_in_links = true,
+
+      -- Command palette theme: dropdown (window) or ivy (bottom panel)
+      command_palette_theme = "ivy",
+
+      -- Tag list theme:
+        -- get_cursor (small tag list at cursor)
+        -- dropdown (window)
+        -- ivy (bottom panel)
+      show_tags_theme = "ivy",
+
+      -- Previewer for media files (images mostly)
+        -- "telescope-media-files" if you have telescope-media-files.nvim installed
+        -- "catimg-previewer" if you have catimg installed
+        -- "viu-previewer" if you have viu installed
+      media_previewer = "telescope-media-files",
+
+      -- Customize insert image and preview image files list. This is useful
+      -- to add optional filetypes into filtered list (for example
+      -- telescope-media-files optionally supporting svg preview)
+      media_extensions = {
+        ".png",
+        ".jpg",
+        ".bmp",
+        ".gif",
+        ".pdf",
+        ".mp4",
+        ".webm",
+        ".webp",
+      },
+
+      -- Calendar integration
+      plug_into_calendar = true,         -- use calendar integration
+      calendar_opts = {
+        weeknm = 4,                      -- calendar week display mode:
+                                         --   1 .. 'WK01'
+                                         --   2 .. 'WK 1'
+                                         --   3 .. 'KW01'
+                                         --   4 .. 'KW 1'
+                                         --   5 .. '1'
+
+        calendar_monday = 1,             -- use monday as first day of week:
+                                         --   1 .. true
+                                         --   0 .. false
+
+        calendar_mark = 'left-fit',      -- calendar mark placement
+                                         -- where to put mark for marked days:
+                                         --   'left'
+                                         --   'right'
+                                         --   'left-fit'
+      },
+
+      vaults = {
+        default = {
+          -- configuration for personal vault. E.g.:
+          home = "/home/nery/wiki/",
+        },
+	escola = 
+	{
+		home = "/home/nery/wiki/escola_online/",
+	},
+	gastos = 
+	{
+		home = "/home/nery/wiki/gastos/",
+	},
+      },
+
+      -- Specify a clipboard program to use
+      clipboard_program = "", -- xsel, xclip, wl-paste, osascript
+    }
+)
+
+require('neoscroll').setup({
+})
+
+local t = {}
+-- Syntax: t[keys] = {function, {function arguments}}
+t['<C-a>'] = {'scroll', {'-vim.wo.scroll', 'true', '200'}}
+t['<C-d>'] = {'scroll', { 'vim.wo.scroll', 'true', '200'}}
+t['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '450'}}
+t['<C-u>'] = {'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '450'}}
+t['<C-y>'] = {'scroll', {'-0.10', 'false', '100'}}
+t['<C-e>'] = {'scroll', { '0.10', 'false', '100'}}
+
+
+
+require("nvim-autopairs").setup {}
+require("oil").setup({
+keymaps = {
+    ["g?"] = "actions.show_help",
+    ["<CR>"] = "actions.select",
+    ["<C-s>"] = "actions.select_vsplit",
+    ["<C-h>"] = "actions.select_split",
+    ["<C-t>"] = "actions.select_tab",
+    ["<C-p>"] = "actions.preview",
+    ["q"] = "actions.close",
+    ["<C-l>"] = "actions.refresh",
+    ["<BS>"] = "actions.parent",
+    ["cdw"] = "actions.open_cwd",
+    ["cd"] = "actions.cd",
+    ["~"] = "actions.tcd",
+    ["gs"] = "actions.change_sort",
+    ["gx"] = "actions.open_external",
+    ["g."] = "actions.toggle_hidden",
+    ["g\\"] = "actions.toggle_trash",
+  },
+}
+)
+
+local Rule = require('nvim-autopairs.rule')
+local npairs = require('nvim-autopairs')
+local cond = require('nvim-autopairs.conds')
+npairs.add_rules({
+Rule("*", "*"),
+Rule("**", "*"),
+}
+)
+
+
+```
+
+`/home/nery/.config/nvim/lua/treesitter_config.lua`:
+
+```lua
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "python" },
+
+  textobjects = {
+    select = {
+      enable = true,
+
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        -- You can optionally set descriptions to the mappings (used in the desc parameter of
+        -- nvim_buf_set_keymap) which plugins like which-key display
+        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+        -- You can also use captures from other query groups like `locals.scm`
+        ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+      },
+
+	  move = {
+	    enable = true,
+	    set_jumps = true,
+	    goto_next_start = {
+	      ["<leader>f"] = "@function.outer",
+	    },
+	    goto_previous_start = {
+	      ["<leader>F"] = "@function.outer",
+	    },
+	  },
+	      -- You can choose the select mode (default is charwise 'v')
+      --
+      -- Can also be a function which gets passed a table with the keys
+      -- * query_string: eg '@function.inner'
+      -- * method: eg 'v' or 'o'
+      -- and should return the mode ('v', 'V', or '<c-v>') or a table
+      -- mapping query_strings to modes.
+      selection_modes = {
+        ['@parameter.outer'] = 'v', -- charwise
+        ['@function.outer'] = 'V', -- linewise
+        ['@class.outer'] = '<c-v>', -- blockwise
+      },
+      -- If you set this to `true` (default is `false`) then any textobject is
+      -- extended to include preceding or succeeding whitespace. Succeeding
+      -- whitespace has priority in order to act similarly to eg the built-in
+      -- `ap`.
+      --
+      -- Can also be a function which gets passed a table with the keys
+      -- * query_string: eg '@function.inner'
+      -- * selection_mode: eg 'v'
+      -- and should return true of false
+      include_surrounding_whitespace = true,
+    },
+  },
+
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = { "javascript" },
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = true,
+
+
+  },
+}
+
+
+-- examples for your init.lua
+
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+function _G.goto_next_function()
+    local function find_next_function()
+        local current_line = vim.fn.line('.')
+        local last_line = vim.fn.line('$')
+        
+        for line = current_line + 1, last_line do
+            if vim.fn.getline(line):match('^%s*def%s') or  -- Python
+               vim.fn.getline(line):match('^%s*fn%s') or   -- Rust
+               vim.fn.getline(line):match('^%s*function%s') then  -- JavaScript/Lua
+                return line
+            end
+        end
+        return nil
+    end
+    
+    local target_line = find_next_function()
+    if target_line then
+        vim.fn.cursor(target_line, 1)
+    end
+end
+
+function _G.goto_previous_function()
+    local function find_previous_function()
+        local current_line = vim.fn.line('.')
+        
+        for line = current_line - 1, 1, -1 do
+            if vim.fn.getline(line):match('^%s*def%s') or  -- Python
+               vim.fn.getline(line):match('^%s*fn%s') or   -- Rust
+               vim.fn.getline(line):match('^%s*function%s') then  -- JavaScript/Lua
+                return line
+            end
+        end
+        return nil
+    end
+    
+    local target_line = find_previous_function()
+    if target_line then
+        vim.fn.cursor(target_line, 1)
+    end
+end
+
+-- Set up keymaps
+vim.keymap.set('n', 'f', _G.goto_next_function)
+vim.keymap.set('n', 'F', _G.goto_previous_function)
+
+
+
+```
+
+`/home/nery/.config/nvim/lua/telescope_config.lua`:
+
+```lua
+local fb_actions = require "telescope".extensions.file_browser.actions
+local actions = require('telescope.actions')
+require("telescope").setup {
+  extensions = {
+    file_browser = {
+      theme = "ivy",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      mappings = {
+        ["i"] = {
+          ["<C-d>"] = fb_actions.change_cwd
+          -- your custom insert mode mappings
+        },
+        ["n"] = {
+          ["<C-c>"] = function(prompt_bufnr)
+              -- your custom function logic here
+            end
+        },
+      },
+    },
+  },
+}
+
+require("telescope").load_extension "file_browser"
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>fb",
+  "<cmd>lua require 'telescope'.extensions.file_browser.file_browser({files=false}, {depth=false})<CR>",
+  { noremap = true }
+)
+
+vim.g.nvim_tree_root_folder_modifier = ':~'
+
+```
+
+`/home/nery/.config/nvim/lua/snippets_markdown.lua`:
+
+```lua
+local luasnip = require("luasnip")
+
+luasnip.snippets = {
+  markdown = {
+    luasnip.snippet(
+      {
+        trig = "gasto",
+        dscr = "Create a new expend note",
+      },
+      {
+        -- Placeholder values
+        t("---"),
+        t("title: "),
+        i(1, "{{title}}"),
+        t("\ndate:  "),
+        f(function()
+          return os.date("%Y-%m-%d")
+        end),
+        t("\ntime:  "),
+        f(function()
+          return os.date("%H:%M")
+        end),
+        t("---\n"),
+        t("\n# Gasto\n"),
+        t("\n## Valor\n"),
+        t("\n## Data\n"),
+        f(function()
+          return os.date("%Y-%m-%d")
+        end),
+        t("\n## Horario\n"),
+        f(function()
+          return os.date("%H:%M")
+        end),
+        t("\n## Categoria\n"),
+        t("\n--Mercado,Casa,Lazer, Alimentação, Transporte, Compra, Diversos, Aluguel, Impostos, Investimentos, Compras planejadas, Contas Fixas--"),
+        t("\n## Subcategoria\n"),
+        t("\n--ifood,feira,pao de açúcar, saída,"),
+        t("\n## Descricao\n"),
+        t("\n## Share\n0"),
+      }
+    ),
+  },
+}
+
+```
+
+`/home/nery/.config/nvim/lua/cmp_config.lua`:
+
+```lua
+require('luasnip.loaders.from_vscode').lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.fn.stdpath("config") .. "/snippets/" })
+vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+
+
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+
+local select_opts = {behavior = cmp.SelectBehavior.Select}
+
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+cmp.setup({
+
+    completion = {
+      autocomplete = false
+    },
+
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end
+  },
+  sources = {
+    { name = 'path' },
+    {name = 'codeium'},
+    {name = 'luasnip', keyword_length = 2},
+    {name = 'nvim_lsp', keyword_length = 2},
+    {name = 'buffer', keyword_length = 3},
+  },
+  window = {
+    documentation = cmp.config.window.bordered()
+  },
+  formatting = {
+    fields = {'menu', 'abbr', 'kind'},
+    format = function(entry, item)
+      local menu_icon = {
+	codeium = "{..}",
+        nvim_lsp = 'λ',
+        luasnip = 's',
+        buffer = 'b',
+        path = 'pth',
+      }
+
+      item.menu = menu_icon[entry.source.name]
+      return item
+    end,
+  },
+  mapping = {
+    ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
+    ['<Down>'] = cmp.mapping.select_next_item(select_opts),
+
+    ['<C-p>'] = cmp.mapping.select_prev_item(select_opts),
+    ['<C-n>'] = cmp.mapping.select_next_item(select_opts),
+
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+
+    ['<C-e>'] = cmp.mapping.complete(),
+
+    ['<CR>'] = cmp.mapping.confirm({select = false}),
+
+    ['<C-d>'] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(1) then
+        luasnip.jump(1)
+      else
+        fallback()
+      end
+    end, {'i', 's'}),
+    ['<C-a>'] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {'i', 's'}),
+    ['<C-b>'] = cmp.mapping(function(fallback)
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, {'i', 's'}),
+
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.jumpable(1) then
+        luasnip.jump(1)
+      elseif has_words_before() then
+	      cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  },
+
+
+})
+
+
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
+
+```
+
+`/home/nery/.config/nvim/lua/vscode_.lua`:
+
+```lua
+local M = {}
+
+local augroup = vim.api.nvim_create_augroup
+local keymap = vim.api.nvim_set_keymap
+
+M.my_vscode = augroup('MyVSCode', {})
+
+vim.filetype.add {
+    pattern = {
+        ['.*%.ipynb.*'] = 'python',
+        -- uses lua pattern matching
+        -- rathen than naive matching
+    },
+}
+
+local function notify(cmd)
+    return string.format("<cmd>call VSCodeNotify('%s')<CR>", cmd)
+end
+
+local function v_notify(cmd)
+    return string.format("<cmd>call VSCodeNotifyVisual('%s', 1)<CR>", cmd)
+end
+
+keymap('n', '<Leader>xr', notify 'references-view.findReferences', { silent = true }) -- language references
+keymap('n', '<Leader>xd', notify 'workbench.actions.view.problems', { silent = true }) -- language diagnostics
+keymap('n', 'gr', notify 'editor.action.goToReferences', { silent = true })
+keymap('n', 'gd', notify 'editor.action.revealDefinition', { silent = true })
+keymap('n', '<Leader>rn', notify 'editor.action.rename', { silent = true })
+keymap('n', '<Leader>fm', notify 'editor.action.formatDocument', { silent = true })
+keymap('n', '<Leader>ca', notify 'editor.action.refactor', { silent = true }) -- language code actions
+
+keymap('n', '<Leader>gr', notify 'workbench.action.findInFiles', { silent = true }) -- use ripgrep to search files
+keymap('n', '<Leader>rg', notify 'workbench.action.findInFiles', { silent = true }) -- use ripgrep to search files
+keymap('n', '<Leader>ts', notify 'workbench.action.toggleSidebarVisibility', { silent = true })
+keymap('n', '<Leader>fc', notify 'workbench.action.showCommands', { silent = true }) -- find commands
+keymap('n', '<Leader>o', notify 'workbench.action.quickOpen', { silent = true }) -- find files
+
+keymap('v', '<Leader>fm', v_notify 'editor.action.formatSelection', { silent = true })
+keymap('v', '<Leader>ca', v_notify 'editor.action.refactor', { silent = true })
+keymap('v', '<Leader>fc', v_notify 'editor.action.commentLine', { silent = true })
+
+
+return M
+
+```
+
+`/home/nery/.config/nvim/lua/iron_nvim_config.lua`:
+
+```lua
+local iron = require("iron.core")
+
+local view = require("iron.view")
+
+iron.setup {
+  config = {
+    -- Whether a repl should be discarded or not
+    scratch_repl = true,
+    -- Your repl definitions come here
+    repl_definition = {
+      python = {
+        command = { "ipython" },
+        format = require("iron.fts.common").bracketed_paste,
+      },
+    },
+    -- How the repl window will be displayed
+    -- See below for more information
+repl_open_cmd = view.split.vertical.botright(0.44),
+  },
+
+
+
+  -- Iron doesn't set keymaps by default anymore.
+  -- You can set them here or manually add keymaps to the functions in iron.core
+  keymaps = {
+    send_motion = "<space>sc",
+    visual_send = "<leader>w",
+    send_file = "<space>sf",
+    send_line = "<leader>w",
+    send_mark = "<space>sm",
+    mark_motion = "<space>mc",
+    mark_visual = "<space>mc",
+    remove_mark = "<space>md",
+    cr = "<space>s<cr>",
+    interrupt = "<space>s<space>",
+    exit = "<space>sq",
+    clear = "<space>cl",
+  },
+  -- If the highlight is on, you can change how it looks
+  -- For the available options, check nvim_set_hl
+  highlight = {
+    italic = true
+  },
+  ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
+}
+
+-- iron also has a list of commands, see :h iron-commands for all available commands
+vim.keymap.set('n', '<leader>rs', '<cmd>IronRepl<cr>')
+vim.keymap.set('n', '<space>rr', '<cmd>IronRestart<cr>')
+vim.keymap.set('n', '<space>rf', '<cmd>IronFocus<cr>')
+vim.keymap.set('n', '<leader>rh', '<cmd>IronHide<cr>')
+
+
+```
+
+`/home/nery/.config/nvim/lua/markdown_config.lua`:
+
+```lua
+require('glow').setup({
+	  -- your override config
+	   })
+
+```
+
+`/home/nery/.config/nvim/lua/obsidian_config.lua`:
+
+```lua
+require('obsidian').setup({
+	  -- your override config
+	   })
+
+```
+
+`/home/nery/.config/nvim/lua/lspconfig_config.lua`:
+
+```lua
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+require('lspconfig').jedi_language_server.setup {
+  capabilities = capabilities, 
+}
+
+require('lspconfig').marksman.setup {
+  capabilities = capabilities,
+}
+
+require('lspconfig').terraformls.setup {
+	capabilities = capabilities
+}
+
+require('lspconfig').clangd.setup({
+  on_attach = function(client, bufnr)
+    vim.fn_call('nvim_buf_set_option', bufnr, 'undolevels', -1)
+  end,
+  capabilities = {
+    document_formatting = true,
+    completion = {
+      completion_trigger_kind = {
+        document_symbol = true,
+      },
+    },
+    hover = true,
+    implementation = true,  -- Enable implementation for clangd, for example
+  },
+})
+
+require('lspconfig').efm.setup {
+    init_options = {documentFormatting = true},
+    filetypes = {"python"},
+    settings = {
+        rootMarkers = {".git/"},
+        languages = {
+            python = {
+                {formatCommand = "black --quiet -", formatStdin = true},
+                {
+                    lintCommand = "flake8 --stdin-display-name ${INPUT} -",
+                    lintStdin = true,
+                    lintFormats = {"%f:%l:%c: %m"}
+                }
+            }
+        }
+    }
+}
+
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
+
+vim.lsp.set_log_level("debug")
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- ... existing mappings ...
+
+    -- Add signature help keybinding
+    vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { buffer = ev.buf })
+  end,
+})
+
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
+
+
+-- Map the toggle command to <leader>gt
+vim.api.nvim_set_keymap('n', '<leader>gt', '<cmd>lua toggle_lint_diagnosis()<CR>', { noremap = true, silent = true })
+
+-- Define a function to trigger document formatting
+local function format_document()
+    vim.lsp.buf_request(0, 'textDocument/formatting', nil, function(err, _, _)
+        if err then
+            print('Error formatting:', err)
+        else
+            print('Document formatted successfully')
+        end
+    end)
+end
+
+-- Map the format function to a key binding
+vim.api.nvim_set_keymap('n', '<leader>ff', ':lua format_document()<CR>', { noremap = true, silent = true })
+
+```
+
+`/home/nery/.config/nvim/lua/lazy_config.lua`:
+
+```lua
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+local plugins = {
+    -- General plugins
+    {"nvim-lua/plenary.nvim"},
+    {"nvim-telescope/telescope.nvim"},
+    {"renerocksai/telekasten.nvim"},
+    {"junegunn/fzf"},
+    {"junegunn/fzf.vim"},
+    {"MunifTanjim/nui.nvim"},
+    {"nvim-telescope/telescope-file-browser.nvim"},
+    {'stevearc/oil.nvim'},
+    {"nvim-treesitter/nvim-treesitter"},
+    {'nvim-treesitter/nvim-treesitter-textobjects'},
+    {"dikiaap/minimalist"},
+    {"tanvirtin/monokai.nvim"},
+    {"marko-cerovac/material.nvim"},
+    {"tpope/vim-surround"},
+    {"tpope/vim-commentary"},
+    {"tpope/vim-fugitive"},
+    {"pixelneo/vim-python-docstring"},
+    {"wellle/targets.vim"},
+    {"karb94/neoscroll.nvim"},
+    {"rlane/pounce.nvim"},
+    {"justinmk/vim-sneak"},
+    {"ap/vim-buftabline"},
+    {"nvim-tree/nvim-web-devicons"},
+    {"nvim-tree/nvim-tree.lua"},
+    {"romgrk/barbar.nvim"},
+    {"windwp/nvim-autopairs"},
+    {"lervag/wiki.vim"},
+    {"ellisonleao/glow.nvim"},
+    {"junegunn/goyo.vim"},
+
+    -- LaTeX and Jupyter
+    {"lervag/vimtex"},
+    {"hkupty/iron.nvim"},
+    {"GCBallesteros/jupytext.vim"},
+	-- {
+	--   "epwalsh/obsidian.nvim",
+	--   version = "*",  -- recommended, use latest release instead of latest commit
+	--   lazy = true,
+	--   ft = "markdown",
+	--   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+	--   -- event = {
+	--   --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+	--   --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+	--   --   "BufReadPre path/to/my-vault/**.md",
+	--   --   "BufNewFile path/to/my-vault/**.md",
+	--   -- },
+	--   dependencies = {
+	--     -- Required.
+	--     "nvim-lua/plenary.nvim",
+
+	--     -- see below for full list of optional dependencies 👇
+	--   },
+
+    -- LSP and completion
+    {"neovim/nvim-lspconfig"},
+    {"hrsh7th/cmp-nvim-lsp"},
+    {'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'},
+    {"simrat39/rust-tools.nvim"},
+    {"mfussenegger/nvim-dap"},
+    {"hrsh7th/cmp-buffer"},
+    {"hrsh7th/cmp-path"},
+    {"hrsh7th/cmp-cmdline"},
+    {"hrsh7th/nvim-cmp"},
+    {"Exafunction/codeium.nvim"},
+{
+    "Exafunction/codeium.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "hrsh7th/nvim-cmp",
+    },
+    config = function()
+        require("codeium").setup({
+        })
+    end
+},
+
+    -- Snippets
+    {"L3MON4D3/LuaSnip"},
+    {"saadparwaiz1/cmp_luasnip"},
+    {"rafamadriz/friendly-snippets"},
+
+
+}
+local opts = {
+    -- workspaces = {
+    --   {
+    --     name = "Anatel",
+    --     path = "~/wiki/Anatel/",
+    --   },
+  -- },
+}
+
+require("lazy").setup(plugins, opts)
+
+```
+
+`/home/nery/.config/nvim/lua/nvim_tree_config.lua`:
+
+```lua
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 30,
+   side = 'left', -- 'left' or 'right'
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+
+
+
+```
+
+`/home/nery/.config/nvim/lua/clipboard_image.lua`:
+
+```lua
+local vim = vim
+
+local function paste_image()
+  -- Check for Markdown file
+  local filetype = vim.bo.filetype
+  if filetype ~= "markdown" then
+    return
+  end
+
+  -- Get image path (replace with actual clipboard retrieval if needed)
+  local image_path = "/home/nery/Pictures/tmp.png"
+
+  -- Generate new image name
+  local filename = vim.fn.expand("%:p:h:t") .. "_image" .. os.time() .. ".png"
+  local target_path = vim.fn.expand("%:p:h") .. "/img/" .. filename
+
+  -- Copy image to target directory
+  vim.fn.mkdir(vim.fn.expand("%:p:h") .. "/img/", "p")
+  vim.fn.system({ "cp", image_path, target_path })
+
+  -- Insert Markdown link
+  vim.api.nvim_put({ "![](img/" .. filename .. ")\n", type = "c" })
+end
+
+-- Hook <leader>p key press
+vim.api.nvim_set_keymap("n", "<leader>pi", ":lua paste_image()<CR>", { noremap = true, silent = true })
+
+```
+
+`/home/nery/.config/nvim/spell/en.utf-8.add`:
+
+```add
+hc
+
+```
+
+`/home/nery/.config/nvim/snippets/package.json`:
+
+```json
+{
+  "name": "personal-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "markdown"
+        ],
+        "path": "./gasto.json"
+      }
+    ]
+  }
+}
+
+```
+
+`/home/nery/.config/nvim/snippets/gasto.json`:
+
+```json
+{
+  "metadata": {
+    "prefix": "meta",
+    "body": [
+      "---",
+      "title: ${TM_FILENAME_BASE}",
+      "date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "time: ${CURRENT_HOUR}:${CURRENT_MINUTE}",
+      "---"
+    ]
+  },
+
+  "gasto": {
+    "prefix": "gs",
+    "body": [
+      "# Gasto",
+      "",
+      "## Valor",
+      "${1:}",
+      "",
+      "## Data",
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "",
+      "## Horario",
+      "${CURRENT_HOUR}:${CURRENT_MINUTE}",
+      "",
+      "## Categoria",
+      "${2:}",
+      "--Mercado, Casa, Lazer, Alimentação, Transporte, Compra, Diversos, Aluguel, Impostos, Investimentos, Compras Planejadas--",
+      "",
+      "## Subcategoria",
+      "${3:}",
+      "",
+      "## Descricao",
+      "${4:}",
+      "",
+      "## Share",
+      "${5:0}"
+    ]
+  },
+  "gasto avulso": {
+    "prefix": "ga",
+    "body": [
+      "# Gasto",
+      "",
+      "## Valor",
+      "${1:}",
+      "",
+      "## Data",
+      "${2:2024-}",
+      "",
+      "## Horario",
+      "${3:}",
+      "",
+      "## Categoria",
+      "${4:}",
+      "--Mercado, Casa, Lazer, Alimentação, Transporte, Compra, Diversos, Aluguel, Impostos, Investimentos, Compras Planejadas--",
+      "",
+      "## Subcategoria",
+      "${5:}",
+      "",
+      "## Descricao",
+      "${6:}",
+      "",
+      "## Share",
+      "${7:0}"
+    ]
+  }
+
+}
+
+
+```

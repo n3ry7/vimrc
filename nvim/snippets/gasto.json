@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "prefix": "meta",
+    "body": [
+      "---",
+      "title: ${TM_FILENAME_BASE}",
+      "date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "time: ${CURRENT_HOUR}:${CURRENT_MINUTE}",
+      "---"
+    ]
+  },
+
+  "gasto": {
+    "prefix": "gs",
+    "body": [
+      "# Gasto",
+      "",
+      "## Valor",
+      "${1:}",
+      "",
+      "## Data",
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "",
+      "## Horario",
+      "${CURRENT_HOUR}:${CURRENT_MINUTE}",
+      "",
+      "## Categoria",
+      "${2:}",
+      "--Mercado, Casa, Lazer, Alimentação, Transporte, Compra, Diversos, Aluguel, Impostos, Investimentos, Compras Planejadas--",
+      "",
+      "## Subcategoria",
+      "${3:}",
+      "",
+      "## Descricao",
+      "${4:}",
+      "",
+      "## Share",
+      "${5:0}"
+    ]
+  },
+  "gasto avulso": {
+    "prefix": "ga",
+    "body": [
+      "# Gasto",
+      "",
+      "## Valor",
+      "${1:}",
+      "",
+      "## Data",
+      "${2:2024-}",
+      "",
+      "## Horario",
+      "${3:}",
+      "",
+      "## Categoria",
+      "${4:}",
+      "--Mercado, Casa, Lazer, Alimentação, Transporte, Compra, Diversos, Aluguel, Impostos, Investimentos, Compras Planejadas--",
+      "",
+      "## Subcategoria",
+      "${5:}",
+      "",
+      "## Descricao",
+      "${6:}",
+      "",
+      "## Share",
+      "${7:0}"
+    ]
+  },
+  
+
+}
+

@@ -1,0 +1,22 @@
+{
+  "name": "personal-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "markdown"
+        ],
+        "path": "./gasto.json"
+      },
+      {
+        "language": [
+          "json"
+        ],
+        "path": "./gasto_json.json"
+      }
+    ]
+  }
+}

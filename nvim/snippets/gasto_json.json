@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "prefix": "meta",
+    "body": [
+      "---",
+      "title: ${TM_FILENAME_BASE}",
+      "date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${1:${CURRENT_DATE}}",
+      "time: ${CURRENT_HOUR}:${CURRENT_MINUTE}",
+      "---"
+    ],
+    "description": "Add metadata block with title, date and time"
+  },
+
+  "gasto": {
+    "prefix": "gs",
+    "body": [
+      "{",
+      "    \"data\": \"${CURRENT_YEAR}-${CURRENT_MONTH}-${1:${CURRENT_DATE}}\",",
+      "    \"valor\": ${2:0.00},",
+      "    \"categoria\": \"${3:outros}\",",
+      "    \"descricao\": \"${4:Descreva aqui}\"",
+      "},",
+      ""
+    ],
+    "description": "Adiciona uma nova entrada de gasto com data atual (dia editável)"
+  }
+}
